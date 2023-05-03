@@ -44,10 +44,10 @@ for i in range(iml_count-1, max(iml_count-4, -1), -1):
     iml_event = json.loads(REDFISH_OBJ.get(f'/redfish/v1/systems/1/logservices/iml/entries/{i}').text)
     iml_event_time = datetime.datetime.strptime(iml_event['Created'], '%Y-%m-%dT%H:%M:%SZ')
     time_diff = current_date_time - iml_event_time
-    if time_diff.total_seconds() < 10000 and 'Input Power Loss' in iml_event['Message']:
+    if time_diff.total_seconds() < 60 and 'Input Power Loss' in iml_event['Message']:
         found_event = True, i
         break
-    elif time_diff.total_seconds() > 10000:
+    elif time_diff.total_seconds() > 60:
         break
 
 # If no new events exist, end
