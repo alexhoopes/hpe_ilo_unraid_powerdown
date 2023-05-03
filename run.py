@@ -26,8 +26,9 @@ iml_event_time = ""
 found_event = False
 
 # Set up logging
-log_filename = "logs/" + current_date_time.strftime("%Y-%m-%d") + ".log"
+log_filename = "hpe_ilo_unraid_powerdown/logs/" + current_date_time.strftime("%Y-%m-%d") + ".log"
 logging.basicConfig(filename=log_filename, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger("redfish").setLevel(logging.WARNING)
 logging.info('Checking iLO Integrated Management Log for powerloss events...')
 
 # Create redfish object, login to iLO
